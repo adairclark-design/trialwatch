@@ -1,5 +1,7 @@
 name = "trialwatch"
 compatibility_date = "2024-03-29"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
 
 # Enables Node.js compat for Edge Runtime
 compatibility_flags = ["nodejs_als"]
