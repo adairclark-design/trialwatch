@@ -9,12 +9,28 @@ export const dynamic = 'force-dynamic'
 const DEMO_USER_ID = '85f375c0-2837-4deb-908d-a5a636952008'
 
 export default async function DashboardPage() {
-  const db = getDb()
-  const profiles = await db
-    .select()
-    .from(alertProfiles)
-    .where(eq(alertProfiles.user_id, DEMO_USER_ID))
-    .orderBy(desc(alertProfiles.created_at))
+  let profiles: any[] = []
+  let edgeError = ''
+  
+  try {
+    const db = getDb()
+    profiles = await db
+      .select()
+      .from(alertProfiles)
+      .where(eq(alertProfiles.user_id, DEMO_USER_ID))
+      .orderBy(desc(alertProfiles.created_at))
+  } catch (e: any) {
+    edgeError = e.message || String(e)
+  }
+
+  if (edgeError) {
+    return (
+      <div className="p-10">
+        <h1 className="text-3xl font-bold text-red-600 mb-4">Diagnostic Edge Error</h1>
+        <pre className="bg-slate-900 text-green-400 p-6 rounded-xl">{edgeError}</pre>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-slate-50">
