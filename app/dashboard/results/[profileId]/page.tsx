@@ -7,6 +7,7 @@ import TrialCard from '@/components/TrialCard'
 import Link from 'next/link'
 import PrintButton from '@/components/PrintButton'
 
+export const runtime = 'edge'
 export const dynamic = 'force-dynamic'
 
 interface Props {
