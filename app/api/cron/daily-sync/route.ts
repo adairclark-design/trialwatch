@@ -7,6 +7,8 @@ import { searchAllTrials } from '@/lib/clinicaltrials'
 import { Resend } from 'resend'
 import { generateDigestHtml } from '@/lib/email'
 
+export const dynamic = 'force-dynamic'
+
 // Called by Vercel Cron every Tuesday at 8am UTC
 export async function GET(req: NextRequest) {
   const authHeader = req.headers.get('authorization')
