@@ -21,18 +21,30 @@ export default async function DashboardPage() {
       {/* Nav */}
       <nav className="bg-white border-b border-gray-200 px-6 py-4">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <Link href="/dashboard" className="flex items-center gap-2">
             <div className="w-7 h-7 bg-indigo-600 rounded-lg flex items-center justify-center">
               <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
               </svg>
             </div>
             <span className="font-bold text-gray-900">TrialWatch</span>
-          </div>
+          </Link>
         </div>
       </nav>
 
       <div className="max-w-5xl mx-auto px-6 py-10">
+        {/* Header Tabs */}
+        <div className="border-b border-gray-200 mb-8 flex gap-8">
+          <div className="pb-4 text-indigo-600 font-bold text-lg border-b-2 border-indigo-600">
+            My Monitors
+          </div>
+          <Link 
+            href="/dashboard/shortlist"
+            className="pb-4 text-slate-500 hover:text-slate-800 font-medium text-lg border-b-2 border-transparent"
+          >
+            My Shortlist
+          </Link>
+        </div>
         {/* Header */}
         <div className="flex items-center justify-between mb-10">
           <div>

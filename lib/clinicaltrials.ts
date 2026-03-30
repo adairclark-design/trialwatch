@@ -241,3 +241,11 @@ export function formatStatus(status: string): string {
   }
   return map[status] || status
 }
+
+export function getEligibilityCriteria(study: CTStudy): string | null {
+  return study.protocolSection.eligibilityModule?.eligibilityCriteria || null
+}
+
+export function getPrimaryOutcomes(study: CTStudy): Array<{ measure: string; description?: string; timeFrame?: string }> {
+  return study.protocolSection.outcomesModule?.primaryOutcomes || []
+}

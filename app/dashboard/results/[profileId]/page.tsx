@@ -1,5 +1,5 @@
 import { getDb } from '@/db'
-import { alertProfiles } from '@/db/schema'
+import { alertProfiles, trialBookmarks } from '@/db/schema'
 import { eq, and } from 'drizzle-orm'
 import { redirect } from 'next/navigation'
 import { searchAllTrials, CTStudy } from '@/lib/clinicaltrials'
@@ -32,6 +32,14 @@ export default async function ResultsPage(props: { params: Promise<{ profileId: 
     .limit(1)
 
   if (!profile) redirect('/dashboard')
+
+  // Fetch bookmarked states for TrialCard context
+  const bookmarks = await db
+    .select({ nct_id: trialBookmarks.nct_id })
+    .from(trialBookmarks)
+    .where(eq(trialBookmarks.user_id, DEMO_USER_ID))
+  
+  const bookmarkedSet = new Set(bookmarks.map(b => b.nct_id))
 
   let studies: CTStudy[] = []
   let fetchError = ''
@@ -126,10 +134,11 @@ export default async function ResultsPage(props: { params: Promise<{ profileId: 
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 print:block print:space-y-4">
-            {studies.map((study: CTStudy) => (
+            {studies.map((study: CTStudy, idx: number) => (
               <TrialCard
-                key={study.protocolSection.identificationModule.nctId}
+                key={study.protocolSection?.identificationModule?.nctId || idx}
                 study={study}
+                isBookmarkedInitial={bookmarkedSet.has(study.protocolSection?.identificationModule?.nctId)}
               />
             ))}
           </div>
