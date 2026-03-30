@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/db'
+import { getDb } from '@/db'
 import { alertProfiles, trialSnapshots, digestLog } from '@/db/schema'
 import { eq, and } from 'drizzle-orm'
-import { randomUUID } from 'crypto'
 import { searchAllTrials } from '@/lib/clinicaltrials'
 import { Resend } from 'resend'
 import { generateDigestHtml } from '@/lib/email'
@@ -22,6 +21,7 @@ export async function GET(req: NextRequest) {
 
   // Get all active profiles
   let profiles: any[] = []
+  const db = getDb()
   try {
     profiles = await db.select().from(alertProfiles).where(eq(alertProfiles.active, true))
   } catch (error) {
@@ -62,7 +62,7 @@ export async function GET(req: NextRequest) {
           // Brand new trial
           newTrials.push(study)
           await db.insert(trialSnapshots).values({
-            id: randomUUID(),
+            id: crypto.randomUUID(),
             profile_id: profile.id,
             nct_id: nctId,
             study_data: study as any,
@@ -109,7 +109,7 @@ export async function GET(req: NextRequest) {
         })
 
         await db.insert(digestLog).values({
-          id: randomUUID(),
+          id: crypto.randomUUID(),
           profile_id: profile.id,
           new_trials_count: newTrials.length,
           changed_trials_count: changedTrials.length,

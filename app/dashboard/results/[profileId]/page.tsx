@@ -1,4 +1,4 @@
-import { db } from '@/db'
+import { getDb } from '@/db'
 import { alertProfiles } from '@/db/schema'
 import { eq, and } from 'drizzle-orm'
 import { redirect } from 'next/navigation'
@@ -19,6 +19,7 @@ const DEMO_USER_ID = '85f375c0-2837-4deb-908d-a5a636952008'
 export default async function ResultsPage(props: { params: Promise<{ profileId: string }> }) {
   const params = await props.params;
 
+  const db = getDb()
   const [profile] = await db
     .select()
     .from(alertProfiles)

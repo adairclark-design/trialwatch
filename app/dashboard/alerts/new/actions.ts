@@ -1,8 +1,7 @@
 'use server'
 
-import { db } from '@/db'
+import { getDb } from '@/db'
 import { alertProfiles } from '@/db/schema'
-import { randomUUID } from 'crypto'
 
 const DEMO_USER_ID = '85f375c0-2837-4deb-908d-a5a636952008'
 
@@ -15,8 +14,9 @@ export async function createAlertProfile(payload: {
   email: string
 }) {
   try {
+    const db = getDb()
     const newProfile = await db.insert(alertProfiles).values({
-      id: randomUUID(),
+      id: crypto.randomUUID(),
       user_id: DEMO_USER_ID,
       ...payload,
       country: 'United States',

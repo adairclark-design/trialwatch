@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { format } from 'date-fns'
-import { db } from '@/db'
+import { getDb } from '@/db'
 import { alertProfiles } from '@/db/schema'
 import { eq, desc } from 'drizzle-orm'
 
@@ -9,6 +9,7 @@ export const dynamic = 'force-dynamic'
 const DEMO_USER_ID = '85f375c0-2837-4deb-908d-a5a636952008'
 
 export default async function DashboardPage() {
+  const db = getDb()
   const profiles = await db
     .select()
     .from(alertProfiles)
