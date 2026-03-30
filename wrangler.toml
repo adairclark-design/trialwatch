@@ -1,0 +1,11 @@
+name = "trialwatch"
+compatibility_date = "2024-03-29"
+
+# Enables Node.js compat for Edge Runtime
+compatibility_flags = ["nodejs_als"]
+
+# Production Database Binding
+[[d1_databases]]
+binding = "DB"
+database_name = "trialwatch"
+database_id = "PLACEHOLDER_ID"
