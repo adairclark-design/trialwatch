@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1774840278175,
+      "tag": "0000_violet_shotgun",
+      "breakpoints": true
+    }
+  ]
+}
