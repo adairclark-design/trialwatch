@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Required to prevent Node.js-only packages from bundling into Edge worker chunks
+  serverExternalPackages: ["@libsql/client", "better-sqlite3"],
 };
 
 export default nextConfig;
