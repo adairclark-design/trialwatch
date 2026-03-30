@@ -3,7 +3,7 @@ import { getDb } from '@/db'
 import { alertProfiles, trialSnapshots, digestLog } from '@/db/schema'
 import { eq, and } from 'drizzle-orm'
 import { searchAllTrials } from '@/lib/clinicaltrials'
-import { Resend } from 'resend'
+// import { Resend } from 'resend'
 import { generateDigestHtml } from '@/lib/email'
 
 export const runtime = 'edge'
@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
   }
 
   // Defer initialization to runtime to avoid build crashes on Cloudflare Pages
-  const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy')
+  // const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy')
 
   // Get all active profiles
   let profiles: any[] = []
@@ -101,12 +101,15 @@ export async function GET(req: NextRequest) {
       if (newTrials.length > 0 || changedTrials.length > 0) {
         const html = generateDigestHtml(profile, newTrials, changedTrials)
 
+        console.log('Sending mock email digest...')
+        /*
         await resend.emails.send({
           from: 'TrialWatch <onboarding@resend.dev>',
           to: profile.email,
           subject: `TrialWatch: ${newTrials.length} new + ${changedTrials.length} changed trials — ${profile.name}`,
           html,
         })
+        */
 
         await db.insert(digestLog).values({
           id: crypto.randomUUID(),
