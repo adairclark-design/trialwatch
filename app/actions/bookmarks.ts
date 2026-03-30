@@ -1,4 +1,5 @@
 'use server'
+export const runtime = 'edge'
 
 import { getDb } from '@/db'
 import { trialBookmarks } from '@/db/schema'

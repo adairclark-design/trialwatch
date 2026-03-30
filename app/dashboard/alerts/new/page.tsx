@@ -4,8 +4,6 @@ import { useRouter } from 'next/navigation'
 import { createAlertProfile } from './actions'
 import { STROKE_CONDITIONS, TRIAL_STATUSES, TRIAL_PHASES, SPONSOR_TYPES } from '@/lib/constants'
 
-export const dynamic = 'force-dynamic'
-
 export default function NewAlertPage() {
   const router = useRouter()
   const [saving, setSaving] = useState(false)
