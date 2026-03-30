@@ -7,14 +7,15 @@ import { searchAllTrials } from '@/lib/clinicaltrials'
 import { Resend } from 'resend'
 import { generateDigestHtml } from '@/lib/email'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 // Called by Vercel Cron every Tuesday at 8am UTC
 export async function GET(req: NextRequest) {
   const authHeader = req.headers.get('authorization')
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
+
+  // Defer initialization to runtime to avoid build crashes on Cloudflare Pages
+  const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy')
 
   // Get all active profiles
   let profiles: any[] = []
