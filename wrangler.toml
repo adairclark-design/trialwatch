@@ -8,4 +8,4 @@ compatibility_flags = ["nodejs_als"]
 [[d1_databases]]
 binding = "DB"
 database_name = "trialwatch"
-database_id = "PLACEHOLDER_ID"
+database_id = "6acd47f3-020f-4453-a5fe-13a2ca643acd"
