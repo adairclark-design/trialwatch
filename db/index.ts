@@ -1,11 +1,12 @@
 import { drizzle } from 'drizzle-orm/d1';
-import { getRequestContext } from '@cloudflare/next-on-pages';
+import { getCloudflareContext } from '@opennextjs/cloudflare';
 import * as schema from './schema';
 
-export function getDb() {
-  const env = getRequestContext().env as any;
-  if (!env || !env.DB) {
-    throw new Error('Cloudflare D1 binding not found. Ensure you are running within the Pages Edge Runtime or Wrangler preview.');
+export async function getDb() {
+  const { env } = await getCloudflareContext();
+  const db_env = env as any;
+  if (!db_env || !db_env.DB) {
+    throw new Error('Cloudflare D1 binding (DB) not found. Ensure it is set in the Cloudflare Pages dashboard Settings > Bindings.');
   }
-  return drizzle(env.DB, { schema });
+  return drizzle(db_env.DB, { schema });
 }

@@ -6,7 +6,6 @@ import { searchAllTrials } from '@/lib/clinicaltrials'
 // import { Resend } from 'resend'
 import { generateDigestHtml } from '@/lib/email'
 
-export const runtime = 'edge'
 export const dynamic = 'force-dynamic'
 
 // Called by Vercel Cron every Tuesday at 8am UTC
@@ -21,7 +20,7 @@ export async function GET(req: NextRequest) {
 
   // Get all active profiles
   let profiles: any[] = []
-  const db = getDb()
+  const db = await getDb()
   try {
     profiles = await db.select().from(alertProfiles).where(eq(alertProfiles.active, true))
   } catch (error) {

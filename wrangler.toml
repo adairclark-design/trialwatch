@@ -1,10 +1,11 @@
 name = "trialwatch"
 compatibility_date = "2024-03-29"
 compatibility_flags = ["nodejs_compat", "nodejs_als"]
-pages_build_output_dir = ".vercel/output/static"
+pages_build_output_dir = ".open-next/assets"
 
 # Production Database Binding
 [[d1_databases]]
 binding = "DB"
 database_name = "trialwatch"
 database_id = "6acd47f3-020f-4453-a5fe-13a2ca643acd"
+

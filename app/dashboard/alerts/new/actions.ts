@@ -14,7 +14,7 @@ export async function createAlertProfile(payload: {
   email: string
 }) {
   try {
-    const db = getDb()
+    const db = await getDb()
     const newProfile = await db.insert(alertProfiles).values({
       id: crypto.randomUUID(),
       user_id: DEMO_USER_ID,

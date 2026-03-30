@@ -7,7 +7,6 @@ import TrialCard from '@/components/TrialCard'
 import Link from 'next/link'
 import PrintButton from '@/components/PrintButton'
 
-export const runtime = 'edge'
 export const dynamic = 'force-dynamic'
 
 interface Props {
@@ -19,7 +18,7 @@ const DEMO_USER_ID = '85f375c0-2837-4deb-908d-a5a636952008'
 export default async function ResultsPage(props: { params: Promise<{ profileId: string }> }) {
   const params = await props.params;
 
-  const db = getDb()
+  const db = await getDb()
   const [profile] = await db
     .select()
     .from(alertProfiles)
