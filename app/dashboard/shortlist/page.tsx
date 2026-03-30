@@ -4,7 +4,6 @@ import { trialBookmarks } from '@/db/schema'
 import { eq, desc } from 'drizzle-orm'
 import TrialCard from '@/components/TrialCard'
 
-export const runtime = 'edge'
 export const dynamic = 'force-dynamic'
 
 const DEMO_USER_ID = '85f375c0-2837-4deb-908d-a5a636952008'
