@@ -1,9 +1,12 @@
-name = "trialwatch"
-compatibility_date = "2024-03-29"
-compatibility_flags = ["nodejs_compat", "nodejs_als"]
-pages_build_output_dir = ".open-next/assets"
+name = "trialwatch-app"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+main = ".open-next/worker.js"
 
-# Production Database Binding
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+
 [[d1_databases]]
 binding = "DB"
 database_name = "trialwatch"
